@@ -4,6 +4,8 @@ const port = 5000;
 const bodyParser = require("body-parser");
 const { User } = require("./models/User");
 
+const config = require("./config/key");
+
 /*
     bodyParser는 클라이언트에서 오는 정보를 서버에서 받을 수 있도록 하는 라이브러리
     
@@ -18,13 +20,10 @@ app.use(bodyParser.json());
 
 const mongoose = require("mongoose");
 mongoose
-  .connect(
-    "mongodb+srv://jeff-lee:qwer1234@cluster.zczw9oy.mongodb.net/?retryWrites=true&w=majority",
-    {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    }
-  )
+  .connect(config.mongoURI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
   .then(() => console.log("MongoDB Connected.."))
   .catch((err) => console.log(err));
 
